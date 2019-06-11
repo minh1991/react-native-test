@@ -6,9 +6,9 @@ import * as typeNames from '../Redux/Types'
 class Filter extends Component {
   getTextStyle(statusName) {
     const { myfilter } = this.props
-    console.log('myfilter--', myfilter)
+    // console.log('myfilter--', myfilter)
     if (statusName === myfilter) {
-      return { color: 'yellow', fontWeight: 'bold', marginBottom: 40 }
+      return { color: 'yellow', fontWeight: 'bold', marginBottom: 10 }
     } else {
       return styles.text
     }
@@ -23,7 +23,7 @@ class Filter extends Component {
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() => {
-            console.log(typeNames.ACTION_TYPES.FILTER_SHOW_ALL)
+            // console.log(typeNames.ACTION_TYPES.FILTER_SHOW_ALL)
             this.setFilterStatus(typeNames.ACTION_TYPES.FILTER_SHOW_ALL)
           }}
         >
@@ -32,7 +32,7 @@ class Filter extends Component {
 
         <TouchableOpacity
           onPress={() => {
-            console.log(typeNames.ACTION_TYPES.FILTER_MEMORIZED)
+            // console.log(typeNames.ACTION_TYPES.FILTER_MEMORIZED)
             this.setFilterStatus(typeNames.ACTION_TYPES.FILTER_MEMORIZED)
           }}
         >
@@ -41,7 +41,7 @@ class Filter extends Component {
 
         <TouchableOpacity
           onPress={() => {
-            console.log(typeNames.ACTION_TYPES.FILTER_NEED_PRACTICE)
+            // console.log(typeNames.ACTION_TYPES.FILTER_NEED_PRACTICE)
             this.setFilterStatus(typeNames.ACTION_TYPES.FILTER_NEED_PRACTICE)
           }}
         >
@@ -68,11 +68,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#583C3C',
     alignItems: 'center',
     justifyContent: 'space-around',
-    height: 60,
-    padding: 20
+    height: 40
   },
   text: {
     color: 'white',
-    marginBottom: 40
+    marginBottom: 20
   }
 })

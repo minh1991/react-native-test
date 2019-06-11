@@ -46,6 +46,13 @@ const reducer = (state = initialState, action) => {
       }
       break
 
+    case typeNames.ACTION_TYPES.SHOW_ADDFORM:
+      return {
+        ...state,
+        isAdding: !state.isAdding
+      }
+      break
+
     case typeNames.ACTION_TYPES.SHOW_ITEM:
       return {
         ...state,
@@ -59,6 +66,21 @@ const reducer = (state = initialState, action) => {
             }
           }
         })
+      }
+      break
+
+    case typeNames.ACTION_TYPES.ADD_WORD:
+      return {
+        ...state,
+        arrWords: [
+          {
+            id: state.arrWords.length + 1, // set tạm, còn thực tế sẽ điều chỉnh ID kiểu khác
+            en: action.en,
+            vn: action.vn,
+            memorized: false,
+            isShow: false
+          }
+        ].concat(state.arrWords)
       }
       break
     default:

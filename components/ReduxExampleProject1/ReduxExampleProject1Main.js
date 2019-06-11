@@ -3,12 +3,14 @@ import { Text, View, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import Words from './CPN/Words'
 import Filter from './CPN/Filter'
+import Header from './CPN/Header'
+import AddForm from './CPN/AddForm'
 import * as typeNames from './Redux/Types'
 
 class ReduxExampleProject1Main extends Component {
   getWordList() {
     const { myfilter, myWords } = this.props
-    console.log('myWords--', this.props.myWords)
+    // console.log('myWords--', this.props.myWords)
     if (myfilter === typeNames.SHOW_ALL) {
       return myWords
     }
@@ -27,19 +29,27 @@ class ReduxExampleProject1Main extends Component {
 
   render() {
     // console.log('myWords--', this.props.myWords)
+    console.log('myIsAdding--', this.props.myIsAdding)
     return (
       <View style={{ flex: 1, alignSelf: 'stretch', justifyContent: 'center' }}>
         <View>
+          <Header />
+        </View>
+        <View style={{ flex: 10 }}>
+          {this.props.myIsAdding === true ? <AddForm /> : null}
           <FlatList
             // data={this.props.myWords} // // data sẽ được show tất cả mảng cứng
             //  lấy data theo yêu cầu sử dụng sự kiện nút ở dưới
             data={this.getWordList()}
             renderItem={({ item, index }) => {
-              return <Words myWord={item} index={index} />
+              return <Words myWord={item} />
             }}
+            keyExtractor={(item, index) => index.toString()}
           />
         </View>
-        <Filter />
+        <View>
+          <Filter />
+        </View>
       </View>
     )
   }
@@ -48,7 +58,8 @@ class ReduxExampleProject1Main extends Component {
 const mapStateToProps = state => {
   return {
     myfilter: state.filterStatus,
-    myWords: state.arrWords
+    myWords: state.arrWords,
+    myIsAdding: state.isAdding
   }
 }
 
