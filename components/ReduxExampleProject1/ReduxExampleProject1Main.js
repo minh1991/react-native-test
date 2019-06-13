@@ -5,7 +5,7 @@ import Words from './CPN/Words'
 import Filter from './CPN/Filter'
 import Header from './CPN/Header'
 import AddForm from './CPN/AddForm'
-import * as typeNames from './Redux/Types'
+import * as typeNames from './Redux/Actions/Types'
 
 class ReduxExampleProject1Main extends Component {
   getWordList() {

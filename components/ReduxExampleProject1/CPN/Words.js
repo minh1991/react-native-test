@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import * as typeNames from '../Redux/Types'
+import * as typeNames from '../Redux/Actions/Types'
 
 class Words extends Component {
   memorizedWord() {

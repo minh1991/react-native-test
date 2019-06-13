@@ -1,5 +1,5 @@
 import defaultArrWords from '../../data'
-import * as typeNames from '../Types'
+import * as typeNames from '../Actions/Types'
 
 const initialState = {
   arrWords: defaultArrWords,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
-import * as typeNames from '../Redux/Types'
+import * as typeNames from '../Redux/Actions/Types'
 import { connect } from 'react-redux'
 
 class Header extends Component {
