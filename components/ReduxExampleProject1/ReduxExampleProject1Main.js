@@ -28,7 +28,7 @@ class ReduxExampleProject1Main extends Component {
   }
 
   render() {
-    // console.log('myWords--', this.props.myWords)
+    console.log('myWords--', this.props.myWords)
     console.log('myIsAdding--', this.props.myIsAdding)
     return (
       <View style={{ flex: 1, alignSelf: 'stretch', justifyContent: 'center' }}>

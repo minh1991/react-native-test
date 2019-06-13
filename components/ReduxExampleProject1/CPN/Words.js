@@ -2,20 +2,16 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import * as typeNames from '../Redux/Actions/Types'
+import { toggleMemorizedItem, showItem } from '../Redux/Actions/Actions'
 
 class Words extends Component {
   memorizedWord() {
-    this.props.dispatch({
-      type: typeNames.ACTION_TYPES.TOGGLE_MEMORIZED_ITEM,
-      id: this.props.myWord.id
-    })
+    const { id } = this.props.myWord
+    this.props.myToggleMemorizedItem(id)
   }
-
   showItem() {
-    this.props.dispatch({
-      type: typeNames.ACTION_TYPES.SHOW_ITEM,
-      id: this.props.myWord.id
-    })
+    const { id } = this.props.myWord
+    this.props.myShowItem(id)
   }
   render() {
     const { vn, en, memorized, isShow } = this.props.myWord
@@ -54,6 +50,11 @@ class Words extends Component {
   }
 }
 
+export default connect(
+  null,
+  { myToggleMemorizedItem: toggleMemorizedItem, myShowItem: showItem }
+)(Words)
+
 const styles = StyleSheet.create({
   flatListItem: {
     color: 'black',
@@ -77,5 +78,3 @@ const styles = StyleSheet.create({
     margin: 10
   }
 })
-
-export default connect()(Words)

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import * as typeNames from '../Redux/Actions/Types'
+import { showAddForm } from '../Redux/Actions/Actions'
 import { connect } from 'react-redux'
 
 class Header extends Component {
@@ -9,7 +10,7 @@ class Header extends Component {
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() => {
-            this.props.dispatch({ type: typeNames.ACTION_TYPES.SHOW_ADDFORM })
+            this.props.myShowAddForm()
           }}
         >
           <Image
@@ -22,7 +23,11 @@ class Header extends Component {
     )
   }
 }
-export default connect()(Header)
+
+export default connect(
+  null, //mapStateToProps
+  { myShowAddForm: showAddForm }
+)(Header)
 
 const styles = StyleSheet.create({
   container: {

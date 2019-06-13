@@ -7,6 +7,7 @@ import {
   StyleSheet
 } from 'react-native'
 import * as typeNames from '../Redux/Actions/Types'
+import { showAddForm, addWord } from '../Redux/Actions/Actions'
 import { connect } from 'react-redux'
 
 class AddForm extends Component {
@@ -21,14 +22,8 @@ class AddForm extends Component {
   onAdd() {
     // console.log('aaaa')
     const { en, vn } = this.state
-    this.props.dispatch({
-      type: typeNames.ACTION_TYPES.ADD_WORD,
-      en,
-      vn
-    })
-    this.props.dispatch({
-      type: typeNames.ACTION_TYPES.SHOW_ADDFORM
-    })
+    this.props.addWord(en, vn)
+    this.props.showAddForm()
   }
 
   render() {
@@ -53,7 +48,11 @@ class AddForm extends Component {
     )
   }
 }
-export default connect()(AddForm)
+
+export default connect(
+  null,
+  { showAddForm, addWord }
+)(AddForm)
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
