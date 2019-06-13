@@ -14,6 +14,7 @@ import { Platform, StyleSheet, Text, View } from 'react-native'
 // import CombineDrawerTabNavigator from './components/CombineDrawerTabNavigator/CombineDrawerTabNavigator';
 import ReduxExampleApp from './components/ReduxExample/ReduxExampleApp'
 import ReduxExampleProject1App from './components/ReduxExampleProject1/ReduxExampleProject1App'
+import ReduxExampleAsyncApp from './components/ReduxExampleAsync/ReduxExampleAsyncApp'
 
 export default class App extends Component {
   render() {
@@ -24,7 +25,8 @@ export default class App extends Component {
         {/* <ReactNativeRouterFlux /> */}
         {/* <CombineDrawerTabNavigator /> */}
         {/* <ReduxExampleApp /> */}
-        <ReduxExampleProject1App />
+        {/* <ReduxExampleProject1App /> */}
+        <ReduxExampleAsyncApp />
       </View>
     )
   }

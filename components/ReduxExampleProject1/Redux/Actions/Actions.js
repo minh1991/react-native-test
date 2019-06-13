@@ -7,6 +7,7 @@ export const filterShowAll = () => {
     type: typeNames.ACTION_TYPES.FILTER_SHOW_ALL // phai co
   }
 }
+
 export const filterMemorized = () => {
   console.log(`action đã chọn:  filterMemorized`)
   return {
