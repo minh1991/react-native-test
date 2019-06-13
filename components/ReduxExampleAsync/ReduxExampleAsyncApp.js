@@ -1,13 +1,17 @@
+import { Provider } from 'react-redux'
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import ReduxExampleAsyncMain from './ReduxExampleAsyncMain'
+import Store from './Redux/Store'
 
 export default class ReduxExampleAsyncApp extends Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <ReduxExampleAsyncMain />
-      </View>
+      <Provider store={Store}>
+        <View style={{ flex: 1 }}>
+          <ReduxExampleAsyncMain />
+        </View>
+      </Provider>
     )
   }
 }

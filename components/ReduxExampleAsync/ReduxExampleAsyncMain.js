@@ -7,31 +7,60 @@ import {
   TouchableOpacity
 } from 'react-native'
 import getTemp from './APIgetTemp'
+import { connect } from 'react-redux'
+import { startFetch, fetchSuccess } from './Redux/Actions/AccectAction'
+import { fetchError } from './Redux/Actions/ErrorAction'
 
-export default class ReduxExampleAsyncMain extends Component {
+class ReduxExampleAsyncMain extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       cityName: ''
     }
   }
+
+  getWeatherMsg() {
+    const { cityName, isLoading, temp, error } = this.props
+    console.log('cityName--', cityName)
+    console.log('isLoading--', isLoading)
+    console.log('temp--', temp)
+    console.log('error--', error)
+    if (isLoading) {
+      return '... Đang loat đây này...'
+    }
+    if (error) {
+      return '... Có lỗi rồi...'
+    }
+    if (!cityName) {
+      return '... Nhập tên Thành Phố...'
+    }
+    return `${cityName} đang là: ${temp} oC`
+  }
+
   getTempByCity() {
-    getTemp(this.state.cityName)
-      .then(temp => console.log(temp))
-      .catch(err => console.log(err))
+    let { cityName } = this.state
+    this.props.startFetch()
+    getTemp(cityName)
+      .then(temp => {
+        console.log(temp)
+        this.props.fetchSuccess(cityName, temp)
+      })
+      .catch(err => {
+        // console.log(err)
+        this.props.fetchError()
+      })
   }
 
   render() {
-    console.log('cityName--', this.state.cityName)
+    // console.log('cityName--', this.state.cityName)
     return (
       <View style={styles.container}>
-        <Text style={styles.msg}>Hiện tại đang: oC</Text>
+        <Text style={styles.msg}>{this.getWeatherMsg()}</Text>
         <TextInput
           style={styles.textInput}
           value={this.state.cityName}
           onChangeText={city => {
-            console.log('city--', city)
+            // console.log('city--', city)
             this.setState({ cityName: city })
           }}
         />
@@ -45,6 +74,19 @@ export default class ReduxExampleAsyncMain extends Component {
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    cityName: state.accect.cityName,
+    temp: state.accect.temp,
+    error: state.errors.error,
+    isLoading: state.accect.isLoading
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  { startFetch, fetchSuccess, fetchError }
+)(ReduxExampleAsyncMain)
 
 const styles = StyleSheet.create({
   container: {
@@ -54,7 +96,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   msg: {
-    fontSize: 30
+    fontSize: 20
   },
   btn: {
     backgroundColor: 'green',
