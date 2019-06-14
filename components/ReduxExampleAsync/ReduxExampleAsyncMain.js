@@ -8,8 +8,13 @@ import {
 } from 'react-native'
 import getTemp from './APIgetTemp'
 import { connect } from 'react-redux'
-import { startFetch, fetchSuccess } from './Redux/Actions/AccectAction'
-import { fetchError } from './Redux/Actions/ErrorAction'
+import {
+  startFetch,
+  fetchSuccess,
+  fetchError,
+  fetchDataThunk
+} from './Redux/Actions/AccectAction'
+// import { fetchError } from './Redux/Actions/ErrorAction'
 
 class ReduxExampleAsyncMain extends Component {
   constructor(props) {
@@ -39,16 +44,17 @@ class ReduxExampleAsyncMain extends Component {
 
   getTempByCity() {
     let { cityName } = this.state
-    this.props.startFetch()
-    getTemp(cityName)
-      .then(temp => {
-        console.log(temp)
-        this.props.fetchSuccess(cityName, temp)
-      })
-      .catch(err => {
-        // console.log(err)
-        this.props.fetchError()
-      })
+    // this.props.startFetch()
+    // getTemp(cityName)
+    //   .then(temp => {
+    //     console.log(temp)
+    //     this.props.fetchSuccess(cityName, temp)
+    //   })
+    //   .catch(err => {
+    //     // console.log(err)
+    //     this.props.fetchError()
+    //   })
+    this.props.fetchDataThunk(cityName)
   }
 
   render() {
@@ -74,18 +80,36 @@ class ReduxExampleAsyncMain extends Component {
     )
   }
 }
+// const mapStateToProps = state => {
+//   return {
+//     cityName: state.accect.cityName,
+//     temp: state.accect.temp,
+//     error: state.errors.error,
+//     isLoading: state.accect.isLoading
+//   }
+// }
+
 const mapStateToProps = state => {
   return {
     cityName: state.accect.cityName,
     temp: state.accect.temp,
-    error: state.errors.error,
+    error: state.accect.error,
     isLoading: state.accect.isLoading
   }
 }
 
+// const mapStateToProps = state => {
+//   return {
+//     cityName: state.cityName,
+//     temp: state.temp,
+//     error: state.error,
+//     isLoading: state.isLoading
+//   }
+// }
+
 export default connect(
   mapStateToProps,
-  { startFetch, fetchSuccess, fetchError }
+  { startFetch, fetchSuccess, fetchError, fetchDataThunk }
 )(ReduxExampleAsyncMain)
 
 const styles = StyleSheet.create({

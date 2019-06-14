@@ -1,6 +1,7 @@
 const initialState = {
   cityName: null,
   temp: null,
+  error: false,
   isLoading: false
 }
 
@@ -12,7 +13,7 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: true
       }
-      break
+
     case 'FETCH_SUCCESS':
       console.log('FETCH_SUCCESS', state)
       return {
@@ -22,6 +23,16 @@ export default (state = initialState, action) => {
         temp: action.temp
       }
       break
+
+    case 'FETCH_ERROR':
+      console.log('FETCH_ERROR', state)
+      return {
+        ...state,
+        error: true
+        // cityName: null,
+        // temp: null,
+        // isLoading: false
+      }
 
     default:
       return state

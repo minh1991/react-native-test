@@ -1,3 +1,5 @@
+import getTemp from '../../APIgetTemp'
+
 export const startFetch = () => {
   console.log(`action đã chọn:  startFetch`)
   return {
@@ -11,5 +13,21 @@ export const fetchSuccess = (cityName, temp) => {
     type: 'FETCH_SUCCESS', // phai co
     cityName: cityName,
     temp: temp
+  }
+}
+
+export const fetchError = () => {
+  console.log(`action đã chọn:  fetchError`)
+  return {
+    type: 'FETCH_ERROR' // phai co
+  }
+}
+
+export const fetchDataThunk = cityName => {
+  return dispatch => {
+    dispatch(startFetch())
+    getTemp(cityName)
+      .then(temp => dispatch(fetchSuccess(cityName, temp)))
+      .catch(() => dispatch(fetchError()))
   }
 }
